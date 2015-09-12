@@ -27,7 +27,6 @@ import net.continuumsecurity.behaviour.ILogin;
 import net.continuumsecurity.behaviour.ILogout;
 import net.continuumsecurity.behaviour.IRecoverPassword;
 import net.continuumsecurity.clients.Browser;
-import net.continuumsecurity.clients.AuthTokenManager;
 import net.continuumsecurity.proxy.LoggingProxy;
 import net.continuumsecurity.proxy.ZAProxyScanner;
 import net.continuumsecurity.web.Application;
@@ -43,7 +42,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -235,7 +233,7 @@ public class WebApplicationSteps {
     }
     
     public LoggingProxy getProxy() {
-    	if (proxy == null) proxy = new ZAProxyScanner(Config.getInstance().getProxyHost(),Config.getInstance().getProxyPort(),Config.getInstance().getProxyApi());
+    	if (proxy == null) proxy = new ZAProxyScanner(Config.getInstance().getProxyHost(),Config.getInstance().getZapPort(),Config.getInstance().getZapApi());
     	return proxy;
     }
 

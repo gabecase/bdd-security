@@ -27,7 +27,7 @@ public class RopeyClient implements AuthTokenManager {
         webClient = WebClient.create(Config.getInstance().getBaseUrl());
         ClientConfiguration config = webClient.getConfig(webClient);
         config.getHttpConduit().getClient().setProxyServer(Config.getInstance().getProxyHost());
-        config.getHttpConduit().getClient().setProxyServerPort(Config.getInstance().getProxyPort());
+        config.getHttpConduit().getClient().setProxyServerPort(Config.getInstance().getZapPort());
     }
 
     /*

@@ -48,14 +48,14 @@
         <password>continuum</password>
     </nessus>
 
-    <!-- Optional location of a running OWASP ZAP instance.  Either an external- already running ZAP instance must be specified here, or the zapPath must be specified to launch ZAP
-    <proxy>
-        <host>127.0.0.1</host>
-        <port>8888</port>
-        <api></api>
-    </proxy>-->
-
-    <zapPath>zap/zap.sh</zapPath>
+    <zap>
+        <path>zap/zap.sh</path>
+        <apikey>BDD-SECURITY-EMBEDDED</apikey>
+        <!-- Optional location of a running OWASP ZAP instance.  Either an external- already running ZAP instance must be specified here, or the path               must be specified to launch ZAP.
+           <host>127.0.0.1</host>
+           <port>8888</port>
+        -->
+    </zap>
 
     <displayStackTrace>true</displayStackTrace>
     <storyDir>src/main/stories/</storyDir>

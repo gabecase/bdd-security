@@ -161,8 +161,8 @@ public class DriverFactory {
     public DesiredCapabilities createProxyCapabilities() {
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         Proxy proxy = new Proxy();
-        proxy.setHttpProxy(Config.getInstance().getProxyHost() + ":" + Config.getInstance().getProxyPort());
-        proxy.setSslProxy(Config.getInstance().getProxyHost() + ":" + Config.getInstance().getProxyPort());
+        proxy.setHttpProxy(Config.getInstance().getProxyHost() + ":" + Config.getInstance().getZapPort());
+        proxy.setSslProxy(Config.getInstance().getProxyHost() + ":" + Config.getInstance().getZapPort());
         capabilities.setCapability("proxy", proxy);
         return capabilities;
     }

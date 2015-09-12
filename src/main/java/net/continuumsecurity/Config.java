@@ -169,14 +169,14 @@ public class Config {
 
     public String getProxyHost() {
         try {
-            proxyHost = validateAndGetString("proxy.host");
-            proxyPort = Integer.parseInt(validateAndGetString("proxy.port"));
-            proxyApi = validateAndGetString("proxy.api");
+            proxyHost = validateAndGetString("zap.host");
+            proxyPort = Integer.parseInt(validateAndGetString("zap.port"));
+            proxyApi = validateAndGetString("zap.api");
         } catch (RuntimeException e) {
             try {
-                proxyPort = ZapManager.getInstance().startZAP(Config.getInstance().getZapPath());
+                proxyPort = ZapManager.getInstance().startZAP(Config.getInstance().getZapPath(), Config.getInstance().getZapApi());
                 proxyHost = "127.0.0.1";
-                proxyApi = "";
+                proxyApi = getZapPath();
             } catch (Exception re) {
                 log.warning("Error starting embedded ZAP");
                 re.printStackTrace();
@@ -185,16 +185,16 @@ public class Config {
         return Config.getInstance().proxyHost;
     }
 
-    public int getProxyPort() {
+    public int getZapPort() {
         return proxyPort;
     }
 
-    public String getProxyApi() {
+    public String getZapApi() {
         return proxyApi;
     }
 
     public String getZapPath() {
-        return validateAndGetString("zapPath");
+        return validateAndGetString("zap.path");
     }
 
     public boolean displayStackTrace() {

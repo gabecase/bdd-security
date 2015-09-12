@@ -78,7 +78,7 @@ public class AppScanningSteps {
 
     public ZAProxyScanner getScanner() {
         if (scanner == null) {
-            scanner = new ZAProxyScanner(Config.getInstance().getProxyHost(),Config.getInstance().getProxyPort(),Config.getInstance().getProxyApi());
+            scanner = new ZAProxyScanner(Config.getInstance().getProxyHost(),Config.getInstance().getZapPort(),Config.getInstance().getZapApi());
         }
         return scanner;
     }

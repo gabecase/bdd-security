@@ -31,14 +31,15 @@ public class ZapManager {
         return instance;
     }
 
-    public int startZAP(String zapPath) throws Exception {
+    public int startZAP(String zapPath, String apiKey) throws Exception {
         if (process == null) {
             File zapProgramFile = new File(zapPath);
 
             port = findOpenPortOnAllLocalInterfaces();
             String[] cmd = {zapProgramFile.getAbsolutePath(), "-daemon",
                     "-host", HOST,
-                    "-port", String.valueOf(port)};
+                    "-port", String.valueOf(port),
+                    "-config", "api.key="+apiKey};
             log.info("Start ZAProxy [" + zapProgramFile.getAbsolutePath() + "] on port: " + port);
             ProcessBuilder pb = new ProcessBuilder().inheritIO();
             pb.directory(zapProgramFile.getParentFile());
