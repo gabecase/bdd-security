@@ -239,24 +239,22 @@ public class WebApplicationSteps {
 
     @Given("the HTTP request-response containing the default credentials is selected")
     public void findRequestWithPassword() {
+        Utils.pauseForSeconds(1);
         List<HarEntry> requests = getProxy().findInRequestHistory(credentials.getPassword());
         if (requests == null || requests.size() == 0)
             throw new StepException(
-                    "Could not find HTTP request with credentials: "
-                            + credentials.getUsername() + " "
+                    "Could not find HTTP request with password: "
                             + credentials.getPassword());
         currentHar = requests.get(0);
     }
 
-
     @Given("the HTTP request containing the string $value is selected")
     public void findRequestWithString(String value) {
+        Utils.pauseForSeconds(1);
         List<HarEntry> requests = getProxy().findInRequestHistory(value);
         if (requests == null || requests.size() == 0)
             throw new StepException(
-                    "Could not find HTTP request with credentials: "
-                            + credentials.getUsername() + " "
-                            + credentials.getPassword());
+                    "Could not find HTTP request with string: "+value);
         currentHar = requests.get(0);
     }
 
@@ -267,9 +265,9 @@ public class WebApplicationSteps {
 
     @Given("the HTTP request-response containing the login form")
     public void findResponseWithLoginform() throws UnsupportedEncodingException {
+        Utils.pauseForSeconds(1);
         String regex = "(?i)input[\\s\\w=:'\"]*type\\s*=\\s*['\"]password['\"]";
-        List<HarEntry> responses = getProxy().getHistory();
-        responses = getProxy().findInResponseHistory(regex);
+        List<HarEntry> responses = getProxy().findInResponseHistory(regex);
         if (responses == null || responses.size() == 0)
             throw new StepException(
                     "Could not find HTTP response with password form using regex: "
@@ -279,6 +277,7 @@ public class WebApplicationSteps {
 
     @Given("the first HTTP request-response stored by the proxy is selected")
     public void findFirstHar() {
+        Utils.pauseForSeconds(1);
         List<HarEntry> responses = getProxy().getHistory();
         if (responses == null || responses.size() == 0)
             throw new StepException(
@@ -314,6 +313,7 @@ public class WebApplicationSteps {
 
     @Then("the session cookie should have the httpOnly flag set")
     public void sessionCookiesHttpOnlyFlag() {
+        Utils.pauseForSeconds(1);
         int numCookies = Config.getInstance().getSessionIDs().size();
         int cookieCount = 0;
         for (HarEntry entry : getProxy().getHistory()) {
@@ -417,6 +417,7 @@ public class WebApplicationSteps {
                     + " has already been added to the map, using the existing HTTP logs");
             return;
         }
+        Utils.pauseForSeconds(1);
         methodProxyMap.put(method, getProxy().getHistory());
     }
 
@@ -445,6 +446,7 @@ public class WebApplicationSteps {
                     + " has already been added to the map, using the existing HTTP logs");
             return;
         }
+        Utils.pauseForSeconds(1);
         methodProxyMap.put(methodName, getProxy().getHistory());
         boolean accessible = getProxy().findInResponseHistory(sensitiveData).size() > 0;
         if (accessible) {
@@ -465,6 +467,7 @@ public class WebApplicationSteps {
                     + credentials.getPassword()
                     + " could not access the method: " + methodName + "()");
         }
+        Utils.pauseForSeconds(1);
         recordedEntries = getProxy().findInResponseHistory(sensitiveData);
         assertThat("The string: " + sensitiveData + " was not found in the HTTP responses", recordedEntries.size(), greaterThan(0));
         currentHar = recordedEntries.get(0);
@@ -510,6 +513,7 @@ public class WebApplicationSteps {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Utils.pauseForSeconds(1);
         List<HarEntry> results = getProxy().findInResponseHistory(sensitiveData);
         accessible = results != null && results.size() > 0;
         if (!accessible) {
@@ -560,6 +564,7 @@ public class WebApplicationSteps {
 
     @When("the first HTTP request-response is recorded")
     public void recordFirstHarEntry() {
+        Utils.pauseForSeconds(1);
         List<HarEntry> history = getProxy().getHistory();
         if (history == null || history.size() == 0) throw new RuntimeException("No HTTP requests-responses recorded");
         currentHar = history.get(0);

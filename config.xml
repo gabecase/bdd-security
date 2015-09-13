@@ -5,9 +5,9 @@
             which is included in the bdd-security framework for demo purposes. -->
 
     <!-- The web driver to use, can be either Firefox, Chrome or HtmlUnit.  Optionally specify path to the driver (required for linux)
-         Some drivers require a path to the platform specific driver binary, for example chrome needs chromedriver.  If these values are not specified, we'll use HtmlUnit
+         Some drivers require a path to the platform specific driver binary, for example chrome needs chromedriver.  If these values are not specified,           we'll default to using HtmlUnit
     <defaultDriver>firefox</defaultDriver>
-    <defaultDriver path="drivers/chromedriver-mac">Chrome</defaultDriver>-->
+    <defaultDriver path="drivers/chromedriver-mac">Chrome</defaultDriver> -->
 
     <!-- Base URL of the application to test -->
     <baseUrl>http://localhost:9090/</baseUrl>
@@ -49,12 +49,12 @@
     </nessus>
 
     <zap>
-        <path>zap/zap.sh</path>
-        <apikey>BDD-SECURITY-EMBEDDED</apikey>
+        <!-- The Embedded ZAP which is used if you specify the path element below, does not use an API key, but only listens on localhost. -->
+            <path>zap/zap.sh</path>
         <!-- Optional location of a running OWASP ZAP instance.  Either an external- already running ZAP instance must be specified here, or the path               must be specified to launch ZAP.
            <host>127.0.0.1</host>
            <port>8888</port>
-        -->
+           <apikey></apikey> -->
     </zap>
 
     <displayStackTrace>true</displayStackTrace>

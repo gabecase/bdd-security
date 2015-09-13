@@ -246,4 +246,12 @@ public class Utils {
         return theUrl.getPort();
     }
 
+    public static void pauseForSeconds(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

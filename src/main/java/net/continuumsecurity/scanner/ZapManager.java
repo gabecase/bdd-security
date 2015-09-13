@@ -1,5 +1,6 @@
 package net.continuumsecurity.scanner;
 
+import org.apache.commons.lang3.StringUtils;
 import org.zaproxy.clientapi.core.ClientApi;
 
 import java.io.File;
@@ -9,6 +10,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -20,7 +23,7 @@ public class ZapManager {
     private int port;
     String HOST = "127.0.0.1";
     int CONNECTION_TIMEOUT = 15000; //milliseconds
-    String API_KEY = "";
+    String apiKey = "";
     Process process;
 
     private ZapManager() {
@@ -32,15 +35,26 @@ public class ZapManager {
     }
 
     public int startZAP(String zapPath, String apiKey) throws Exception {
+        this.apiKey = apiKey;
         if (process == null) {
             File zapProgramFile = new File(zapPath);
 
             port = findOpenPortOnAllLocalInterfaces();
-            String[] cmd = {zapProgramFile.getAbsolutePath(), "-daemon",
-                    "-host", HOST,
-                    "-port", String.valueOf(port),
-                    "-config", "api.key="+apiKey};
+            List<String> cmd = new ArrayList<>();
+            cmd.add(zapProgramFile.getAbsolutePath());
+            cmd.add("-daemon");
+            cmd.add("-host"); cmd.add(HOST);
+            cmd.add("-port"); cmd.add(String.valueOf(port));
+            cmd.add("-config"); cmd.add("api.enabled=true");
+            if (apiKey == null || apiKey.length() == 0) {
+                cmd.add("-config"); cmd.add("api.disablekey=true");
+            } else {
+                cmd.add("-config"); cmd.add("api.disablekey=false");
+                cmd.add("-config"); cmd.add("api.key=" + apiKey);
+            }
+
             log.info("Start ZAProxy [" + zapProgramFile.getAbsolutePath() + "] on port: " + port);
+            log.info("\t with options: "+ StringUtils.join(cmd," "));
             ProcessBuilder pb = new ProcessBuilder().inheritIO();
             pb.directory(zapProgramFile.getParentFile());
 
@@ -57,7 +71,7 @@ public class ZapManager {
         try {
             log.info("Stopping ZAP");
             ClientApi client = new ClientApi(HOST,port);
-            client.core.shutdown(API_KEY);
+            client.core.shutdown(this.apiKey);
             Thread.sleep(2000);
             process.destroy();
         } catch (final Exception e) {
@@ -88,7 +102,6 @@ public class ZapManager {
                 } catch (InterruptedException e) {
                     throw new RuntimeException("The task was interrupted while sleeping between connection polling.", e);
                 }
-
                 long ellapsedTime = System.currentTimeMillis() - startTime;
                 if (ellapsedTime >= timeoutInMs) {
                     throw new RuntimeException("Unable to connect to ZAP's proxy after " + timeoutInMs + " milliseconds.");

@@ -171,14 +171,14 @@ public class Config {
         try {
             proxyHost = validateAndGetString("zap.host");
             proxyPort = Integer.parseInt(validateAndGetString("zap.port"));
-            proxyApi = validateAndGetString("zap.api");
+            proxyApi = validateAndGetString("zap.apikey");
         } catch (RuntimeException e) {
             try {
                 proxyPort = ZapManager.getInstance().startZAP(Config.getInstance().getZapPath(), Config.getInstance().getZapApi());
                 proxyHost = "127.0.0.1";
-                proxyApi = getZapPath();
+                proxyApi = null;
             } catch (Exception re) {
-                log.warning("Error starting embedded ZAP");
+                log.warning("Error starting embedded ZAP: "+re.getCause().getMessage());
                 re.printStackTrace();
             }
         }
