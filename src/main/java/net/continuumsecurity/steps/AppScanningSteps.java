@@ -225,6 +225,7 @@ public class AppScanningSteps {
 
         }
         if (scannerIds == null) throw new UnexpectedContentException("No matching policy found for: " + policyName);
+        getScanner().disableAllScanners();
         getScanner().setEnableScanners(scannerIds, true);
     }
 
@@ -283,7 +284,8 @@ public class AppScanningSteps {
                 clean.add(alert);
             }
         }
-        alerts = clean;
+        alerts.clear();
+        alerts.addAll(clean);
     }
 
     @Then("no $riskRating or higher risk vulnerabilities should be present")

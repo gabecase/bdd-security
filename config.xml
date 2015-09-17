@@ -49,12 +49,12 @@
     </nessus>
 
     <zap>
-        <!-- The Embedded ZAP which is used if you specify the path element below, does not use an API key, but only listens on localhost. -->
-            <path>zap/zap.sh</path>
-        <!-- Optional location of a running OWASP ZAP instance.  Either an external- already running ZAP instance must be specified here, or the path               must be specified to launch ZAP.
+        <!-- The Embedded ZAP which is used if you specify the path element below, does not use an API key, but only listens on localhost.
+            <path>zap/zap.sh</path>-->
+        <!-- Optional location of a running OWASP ZAP instance.  Either an external- already running ZAP instance must be specified here, or the path               must be specified to launch ZAP. -->
            <host>127.0.0.1</host>
            <port>8888</port>
-           <apikey></apikey> -->
+           <apikey></apikey>
     </zap>
 
     <displayStackTrace>true</displayStackTrace>
