@@ -4,3 +4,4 @@ reports/
 /target
 lib/ivy
 vagrant/
+src/main/stories/auto-generated/*
