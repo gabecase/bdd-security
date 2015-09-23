@@ -139,6 +139,40 @@
         <antcall target="junit.report"/>
     </target>
 
+    <target name="junit.run_story" depends="compile">
+        <property name="username" value=""/>
+        <property name="password" value=""/>
+        <property name="session_id" value=""/>
+        <property name="http_url" value=""/>
+        <property name="https_url" value=""/>
+        <property name="story" value=""/>
+
+        <copy file="config.xml" tofile="temp_config.xml"/>
+        <replace file="config.xml">
+            <replacefilter token="replace_this_username" value="${username}"/>
+            <replacefilter token="replace_this_password" value="${password}"/>
+            <replacefilter token="replace_this_session_id" value="${session_id}"/>
+            <replacefilter token="replace_this_http_url" value="${http_url}"/>
+            <replacefilter token="replace_this_https_url" value="${https_url}"/>
+        </replace>
+        <junit printsummary="yes" haltonfailure="no" showoutput="true">
+            <!-- run specific stories through meta filtering-->
+            <sysproperty key="stories" value="${story}"/>
+            <classpath>
+                <path refid="build.classpath"/>
+                <pathelement location="${build.dir}"/>
+            </classpath>
+
+            <test name="net.continuumsecurity.jbehave.JUnitStoryRunner"
+                  haltonfailure="no" todir="${reports.dir}/junit">
+                <formatter type="xml"/>
+            </test>
+        </junit>
+        <antcall target="junit.report"/>
+        <delete file="config.xml"/>
+        <move file="temp_config.xml" tofile="config.xml"/>
+    </target>
+
     <target name="junit.nessus.run" depends="compile">
         <junit printsummary="yes" haltonfailure="no" showoutput="true">
             <!-- run specific stories through meta filtering -->
@@ -193,6 +227,11 @@
             <fileset dir="${reports.dir}/junit" includes="TEST-*.xml"/>
             <report todir="${reports.dir}/junit/html"/>
         </junitreport>
+        <echo message="moving"></echo>
+        <replace dir="${reports.dir}/junit">
+            <include name="**/*.xml"/>
+            <replacefilter token="${password}" value=""/>
+        </replace>
     </target>
 
     <target name="demo.run">
