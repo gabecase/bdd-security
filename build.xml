@@ -227,6 +227,11 @@
             <fileset dir="${reports.dir}/junit" includes="TEST-*.xml"/>
             <report todir="${reports.dir}/junit/html"/>
         </junitreport>
+        <echo message="moving"></echo>
+        <replace dir="${reports.dir}/junit">
+            <include name="**/*.xml"/>
+            <replacefilter token="${password}" value=""/>
+        </replace>
     </target>
 
     <target name="demo.run">
