@@ -169,6 +169,7 @@
             </test>
         </junit>
         <antcall target="junit.report"/>
+        <delete file="config.xml"/>
         <move file="temp_config.xml" tofile="config.xml"/>
     </target>
 

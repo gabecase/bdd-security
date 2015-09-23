@@ -24,7 +24,7 @@ public class ReachTest extends WebApplication implements ILogin,ILogout {
     @Override
     public void openLoginPage() {
         driver.get(Config.getInstance().getBaseUrl());
-        verifyTextPresent("Welcome to Rackspace!");
+        verifyTextPresent("Welcome");
     }
 
     public void login(Credentials credentials) {
