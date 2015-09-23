@@ -5,20 +5,20 @@
             which is included in the bdd-security framework for demo purposes. -->
 
     <!-- The web driver to use, can be either Firefox, Chrome or HtmlUnit.  Optionally specify path to the driver (required for linux)
-         Some drivers require a path to the platform specific driver binary, for example chrome needs chromedriver.  If these values are not specified, we'll use HtmlUnit
-    <defaultDriver>firefox</defaultDriver>
+         Some drivers require a path to the platform specific driver binary, for example chrome needs chromedriver.  If these values are not specified, we'll use HtmlUnit-->
+    <defaultDriver>chrome</defaultDriver>
     <defaultDriver path="drivers/chromedriver-mac">Chrome</defaultDriver>-->
 
     <!-- Base URL of the application to test -->
-    <baseUrl>http://localhost:9090/</baseUrl>
+    <baseUrl>replace_this_http_url</baseUrl>
 
     <!-- Base Secure URL of the application to test.  Used for the SSL and the HTTP header tests -->
-    <baseSecureUrl>https://www.ssllabs.com/</baseSecureUrl>
+    <baseSecureUrl>replace_this_https_url</baseSecureUrl>
 
     <!-- A Java class to hold the Selenium steps to test the application in depth. Optionally required for in-depth authn/z and session management testing. -->
-    <class>net.continuumsecurity.examples.ropeytasks.RopeyTasksApplication</class>
-
-    <sslyze>/opt/sslyze/sslyze.py --regular</sslyze>
+    <!--<class>net.continuumsecurity.examples.ropeytasks.RopeyTasksApplication</class>-->
+    <class>net.continuumsecurity.examples.ropeytasks.ReachTest</class>
+    <sslyze>/Dev/bdd-security/sslyze-0_11-linux64/sslyze/sslyze.py --regular</sslyze>
 
     <!-- Hosts to scan with Nessus and the port scanner -->
     <hosts>
@@ -30,17 +30,15 @@
 
     <!-- Optional names of the session ID cookies for session management testing. -->
     <sessionIds>
-        <name>JSESSIONID</name>
+        <name>replace_this_session_id</name>
     </sessionIds>
 
     <users>
-        <user username="alice" password="password"/>
-        <user username="bob" password="password"/>
-        <user username="admin" password="password"/>
+        <user username="replace_this_username" password="replace_this_password"/>
     </users>
 
-    <incorrectPassword>SDFsdfwjx1</incorrectPassword>
-    <incorrectUsername>bobbles</incorrectUsername>
+    <incorrectPassword>replace_this_incorrect_password</incorrectPassword>
+    <incorrectUsername>replace_this_incorrect_username</incorrectUsername>
 
     <!-- Optional login credentials for the Nessus server, the server location is specified in the nessus_scan.story file -->
     <nessus>

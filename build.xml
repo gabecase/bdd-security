@@ -139,6 +139,31 @@
         <antcall target="junit.report"/>
     </target>
 
+    <target name="junit.custom" depends="compile">
+        <replace file="config.xml">
+            <replacefilter token="replace_this_username" property="username"/>
+            <replacefilter token="replace_this_password" property="password"/>
+            <replacefilter token="replace_this_session_id" property="session_id"/>
+            <replacefilter token="replace_this_http_url" property="http_url"/>
+            <replacefilter token="replace_this_https_url" property="https_url"/>
+        </replace>
+        <junit printsummary="yes" haltonfailure="no" showoutput="true">
+            <!-- run specific stories through meta filtering-->
+
+            <sysproperty key="stories" value="ssl,session_management,navigate_app"/>
+            <classpath>
+                <path refid="build.classpath"/>
+                <pathelement location="${build.dir}"/>
+            </classpath>
+
+            <test name="net.continuumsecurity.jbehave.JUnitStoryRunner"
+                  haltonfailure="no" todir="${reports.dir}/junit">
+                <formatter type="xml"/>
+            </test>
+        </junit>
+        <antcall target="junit.report"/>
+    </target>
+
     <target name="junit.nessus.run" depends="compile">
         <junit printsummary="yes" haltonfailure="no" showoutput="true">
             <!-- run specific stories through meta filtering -->
