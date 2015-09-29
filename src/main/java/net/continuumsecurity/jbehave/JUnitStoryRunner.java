@@ -101,7 +101,6 @@ public class JUnitStoryRunner extends BaseStoryRunner {
 
         List<String> excludes = new ArrayList<String>();
         excludes.add("**/configuration.story");
-        excludes.add("**/navigate_app.story");
         return new StoryFinder().findPaths(
                 CodeLocations.codeLocationFromURL(storyUrl), includes,
                 excludes);
