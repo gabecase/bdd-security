@@ -7,7 +7,7 @@
     <!-- The web driver to use, can be either Firefox, Chrome or HtmlUnit.  Optionally specify path to the driver (required for linux)
          Some drivers require a path to the platform specific driver binary, for example chrome needs chromedriver.  If these values are not specified, we'll use HtmlUnit-->
     <defaultDriver>chrome</defaultDriver>
-    <defaultDriver path="drivers/chromedriver-mac">Chrome</defaultDriver>-->
+    <defaultDriver path="drivers/chromedriver-linux64">Chrome</defaultDriver>-->
 
     <!-- Base URL of the application to test -->
     <baseUrl>replace_this_http_url</baseUrl>
@@ -18,7 +18,7 @@
     <!-- A Java class to hold the Selenium steps to test the application in depth. Optionally required for in-depth authn/z and session management testing. -->
     <!--<class>net.continuumsecurity.examples.ropeytasks.RopeyTasksApplication</class>-->
     <class>net.continuumsecurity.examples.ropeytasks.ReachTest</class>
-    <sslyze>/Dev/bdd-security/sslyze-0_11-linux64/sslyze/sslyze.py --regular</sslyze>
+    <sslyze>/home/gabrielcase/sslyze/sslyze.py --regular</sslyze>
 
     <!-- Hosts to scan with Nessus and the port scanner -->
     <hosts>
