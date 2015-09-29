@@ -10,10 +10,10 @@
     <defaultDriver path="drivers/chromedriver-linux64">Chrome</defaultDriver>-->
 
     <!-- Base URL of the application to test -->
-    <baseUrl>replace_this_http_url</baseUrl>
+    <baseUrl>http://mycloud.rackspace.com/</baseUrl>
 
     <!-- Base Secure URL of the application to test.  Used for the SSL and the HTTP header tests -->
-    <baseSecureUrl>replace_this_https_url</baseSecureUrl>
+    <baseSecureUrl>https://mycloud.rackspace.com/</baseSecureUrl>
 
     <!-- A Java class to hold the Selenium steps to test the application in depth. Optionally required for in-depth authn/z and session management testing. -->
     <!--<class>net.continuumsecurity.examples.ropeytasks.RopeyTasksApplication</class>-->
