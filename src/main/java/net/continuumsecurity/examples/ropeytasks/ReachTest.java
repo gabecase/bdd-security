@@ -38,6 +38,7 @@ public class ReachTest extends WebApplication implements ILogin,ILogout {
 
     public void logout() {
         driver.get(Config.getInstance().getBaseUrl() + "accounts/logout?logout_success=true");
+        verifyTextPresent("Welcome");
     }
 
     @Override
