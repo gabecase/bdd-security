@@ -1,6 +1,6 @@
 
 Scenario: Navigate and spider the application and find vulnerabilities through passive scanning
-Meta: @pre navigate
+Meta: @story navigate_app @pre navigate
 
 Given a new browser or client instance
 And a new scanning session
