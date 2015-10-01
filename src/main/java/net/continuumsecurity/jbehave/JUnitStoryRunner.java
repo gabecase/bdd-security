@@ -97,7 +97,11 @@ public class JUnitStoryRunner extends BaseStoryRunner {
     @Override
     public List<String> storyPaths() {
         List<String> includes = new ArrayList<String>();
-        includes.add("**/*.story");
+        String[] storyArray = System.getProperty("stories").split(",");
+        for (String story : storyArray){
+            String includedStoryPath = String.format("**/*%s*.story", story);
+            includes.add(includedStoryPath);
+        }
 
         List<String> excludes = new ArrayList<String>();
         excludes.add("**/configuration.story");
