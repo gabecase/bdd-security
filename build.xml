@@ -59,6 +59,12 @@
         <javac target="1.7" source="1.7" srcdir="${src.dir}" destdir="${build.dir}" classpathref="build.classpath"
                debug="true" includeAntRuntime="false">
         </javac>
+        <property name="username" value=""/>
+        <property name="password" value=""/>
+        <property name="session_id" value=""/>
+        <property name="http_url" value=""/>
+        <property name="https_url" value=""/>
+        <property name="story" value=""/>
     </target>
 
     <target name="jbehave.run" depends="compile">
@@ -140,13 +146,6 @@
     </target>
 
     <target name="junit.run_story" depends="compile">
-        <property name="username" value=""/>
-        <property name="password" value=""/>
-        <property name="session_id" value=""/>
-        <property name="http_url" value=""/>
-        <property name="https_url" value=""/>
-        <property name="story" value=""/>
-
         <copy file="config.xml" tofile="temp_config.xml"/>
         <replace file="config.xml">
             <replacefilter token="replace_this_username" value="${username}"/>
