@@ -128,6 +128,8 @@ public class Config {
 
     public String getPasswordSelector() { return validateAndGetString("password_selector"); }
 
+    public String getLogOutUrl() { return validateAndGetString("logoutUrl"); }
+
     public String getClassName() {
         return validateAndGetString("class");
     }

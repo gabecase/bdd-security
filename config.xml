@@ -14,6 +14,7 @@
 
     <!-- Base Secure URL of the application to test.  Used for the SSL and the HTTP header tests -->
     <baseSecureUrl>replace_this_https_url</baseSecureUrl>
+    <logoutUrl>replace_this_logout_url</logoutUrl>
 
     <!-- A Java class to hold the Selenium steps to test the application in depth. Optionally required for in-depth authn/z and session management testing. -->
     <!--<class>net.continuumsecurity.examples.ropeytasks.RopeyTasksApplication</class>-->
