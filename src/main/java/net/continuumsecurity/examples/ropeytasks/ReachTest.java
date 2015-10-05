@@ -15,6 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.Keys;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class ReachTest extends WebApplication implements ILogin,ILogout {
         UserPassCredentials creds = new UserPassCredentials(credentials);
         fillText(By.id(Config.getInstance().getUserNameSelector()), creds.getUsername());
         fillText(By.id(Config.getInstance().getPasswordSelector()), creds.getPassword());
-        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        driver.findElement(By.id(Config.getInstance().getPasswordSelector())).sendKeys(Keys.RETURN);
     }
 
     public void verifySelectorPresent(By by) {
