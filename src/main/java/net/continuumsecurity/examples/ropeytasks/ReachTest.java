@@ -13,9 +13,12 @@ import net.continuumsecurity.web.WebApplication;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.System;
 import java.util.Map;
 import java.util.Properties;
 
@@ -24,21 +27,31 @@ public class ReachTest extends WebApplication implements ILogin,ILogout {
     @Override
     public void openLoginPage() {
         driver.get(Config.getInstance().getBaseUrl());
-        verifyTextPresent("Welcome");
+        verifySelectorPresent(By.id(Config.getInstance().getUserNameSelector()));
     }
 
     public void login(Credentials credentials) {
         UserPassCredentials creds = new UserPassCredentials(credentials);
-        driver.findElement(By.id("id_username")).clear();
-        driver.findElement(By.id("id_username")).sendKeys(creds.getUsername());
-        driver.findElement(By.id("id_password")).clear();
-        driver.findElement(By.id("id_password")).sendKeys(creds.getPassword());
+        fillText(By.id(Config.getInstance().getUserNameSelector()), creds.getUsername());
+        fillText(By.id(Config.getInstance().getPasswordSelector()), creds.getPassword());
         driver.findElement(By.xpath("//button[@type='submit']")).click();
+    }
+
+    public void verifySelectorPresent(By by) {
+        driver.findElement(by);
+    }
+
+    public void fillText(By by, String text) {
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.elementToBeClickable(by));
+        WebElement element = driver.findElement(by);
+        element.clear();
+        element.sendKeys(text);
     }
 
     public void logout() {
         driver.get(Config.getInstance().getBaseUrl() + "accounts/logout?logout_success=true");
-        verifyTextPresent("Welcome");
+        verifySelectorPresent(By.id(Config.getInstance().getUserNameSelector()));
     }
 
     @Override

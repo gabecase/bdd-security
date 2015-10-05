@@ -124,6 +124,9 @@ public class Config {
         return users;
     }
 
+    public String getUserNameSelector() { return validateAndGetString("username_selector"); }
+
+    public String getPasswordSelector() { return validateAndGetString("password_selector"); }
 
     public String getClassName() {
         return validateAndGetString("class");

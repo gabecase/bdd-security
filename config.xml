@@ -53,6 +53,10 @@
         <api></api>
     </proxy>-->
 
+    <username_selector></username_selector>
+    <password_selector></password_selector>
+
+
     <zapPath>zap/zap.sh</zapPath>
 
     <displayStackTrace>true</displayStackTrace>
