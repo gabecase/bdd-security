@@ -1,1 +1,1 @@
-ant -Dusername="reachacceptance1" -Dpassword="insert_your_password" -Dhttp_url="http://mycloud.rackspace.com/" -Dhttps_url="https://mycloud.rackspace.com/" -Dsession_id="sessionid" -Dstory="http_headers" -DlogoutUrl="https://mycloud.rackspace.com/account/logout?logout_success=true" -Dusername_selector="id_username" -Dpassword_selector="id_password" junit.run_story
+ant -Dusername="" -Dpassword="" -Dhttp_url="" -Dhttps_url="" -Dsession_id="" -Dstory="" -DlogoutUrl="" -Dusername_selector="" -Dpassword_selector="" junit.run_story
