@@ -54,8 +54,8 @@
         <api></api>
     </proxy>-->
 
-    <username_selector></username_selector>
-    <password_selector></password_selector>
+    <username_selector>insert_username_selector_here</username_selector>
+    <password_selector>insert_password_selector_here</password_selector>
 
 
     <zapPath>zap/zap.sh</zapPath>

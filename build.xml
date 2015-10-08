@@ -64,7 +64,21 @@
         <property name="session_id" value=""/>
         <property name="http_url" value=""/>
         <property name="https_url" value=""/>
+        <property name="logoutUrl" value=""/>
+        <property name="username_selector" value=""/>
+        <property name="password_selector" value=""/>
         <property name="story" value=""/>
+        <copy file="config.xml" tofile="temp_config.xml"/>
+        <replace file="config.xml">
+            <replacefilter token="replace_this_username" value="${username}"/>
+            <replacefilter token="replace_this_password" value="${password}"/>
+            <replacefilter token="replace_this_session_id" value="${session_id}"/>
+            <replacefilter token="replace_this_http_url" value="${http_url}"/>
+            <replacefilter token="replace_this_https_url" value="${https_url}"/>
+            <replacefilter token="replace_this_logout_url" value="${logoutUrl}"/>
+            <replacefilter token="insert_username_selector_here" value="${username_selector}"/>
+            <replacefilter token="insert_password_selector_here" value="${password_selector}"/>
+        </replace>
     </target>
 
     <target name="jbehave.run" depends="compile">
@@ -145,15 +159,12 @@
         <antcall target="junit.report"/>
     </target>
 
+    <target name="cleanup_config">
+        <delete file="config.xml"/>
+        <move file="temp_config.xml" tofile="config.xml"/>
+    </target>
+
     <target name="junit.run_story" depends="compile">
-        <copy file="config.xml" tofile="temp_config.xml"/>
-        <replace file="config.xml">
-            <replacefilter token="replace_this_username" value="${username}"/>
-            <replacefilter token="replace_this_password" value="${password}"/>
-            <replacefilter token="replace_this_session_id" value="${session_id}"/>
-            <replacefilter token="replace_this_http_url" value="${http_url}"/>
-            <replacefilter token="replace_this_https_url" value="${https_url}"/>
-        </replace>
         <junit printsummary="yes" haltonfailure="no" showoutput="true">
             <!-- run specific stories through meta filtering-->
             <sysproperty key="stories" value="${story}"/>
@@ -168,8 +179,7 @@
             </test>
         </junit>
         <antcall target="junit.report"/>
-        <delete file="config.xml"/>
-        <move file="temp_config.xml" tofile="config.xml"/>
+        <antcall target="cleanup_config"/>
     </target>
 
     <target name="junit.nessus.run" depends="compile">
